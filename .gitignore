@@ -1,0 +1,5 @@
+.DS_Store
+data/.DS_Store
+MVO/C:*
+MVO/.\MVO data*
+data_process/data_clean_2.csv
