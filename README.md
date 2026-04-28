@@ -37,6 +37,7 @@ IDS586_Project_2026/
 ├── data/
 │   ├── ols_top6_by_month_post2022.csv   # OLS monthly top-6 selections
 │   └── rf_top6_by_month_post2022.csv    # RF monthly top-6 selections
+│   └── mvo_monthly_returns.csv          # Backtest monthly realized returns (2022–2025)
 │
 └── README.md
 ```
