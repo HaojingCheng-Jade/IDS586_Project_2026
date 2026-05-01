@@ -149,6 +149,7 @@ pip install pandas numpy scikit-learn scipy matplotlib jupyter
 - Ginger Gao · Duke University
 - Jade Cheng · Duke University
 - Tea Tafaj · Duke University
+- Wenyi Dai · Duke University
 
 ---
 
