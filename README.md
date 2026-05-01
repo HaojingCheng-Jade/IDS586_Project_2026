@@ -24,21 +24,27 @@ The central decision problem is: *At each monthly rebalancing date, how can we u
 ```
 IDS586_Project_2026/
 │
+├── Deliverables/
+│   ├── Documentation.pdf      # Final written report
+│   └── Presentation.pptx      # Final presentation slides
+│
 ├── data_process/
 │   └── Clean_2.ipynb          # Data cleaning, merging, feature engineering
 │
 ├── Modeling/
-│   ├── OLS.ipynb              # Rolling-window OLS regression
+│   ├── new_OLS.ipynb          # Rolling-window OLS regression
 │   └── RandomForest.ipynb     # Rolling-window Random Forest regressor
 │
 ├── MVO/
-│   └── MVO_Portfolio.ipynb    # Mean-variance optimization & backtesting
+│   ├── new_MVO.ipynb          # Mean-variance optimization & backtesting
+│   └── measurement.ipynb      # Portfolio performance metrics & evaluation
 │
 ├── data/
-│   ├── ols_top6_by_month_post2022.csv   # OLS monthly top-6 selections
-│   ├── rf_top6_by_month_post2022.csv    # RF monthly top-6 selections
+│   ├── ols_top6_by_month_post2022.csv   # OLS monthly top-6 stock selections
+│   ├── rf_top6_by_month_post2022.csv    # RF monthly top-6 stock selections
 │   └── mvo_monthly_returns.csv          # Backtest monthly realized returns (2022–2025)
 │
+├── .gitignore
 └── README.md
 ```
 
@@ -70,7 +76,7 @@ IDS586_Project_2026/
 
 ### Phase 2 — Estimation Modeling
 
-#### OLS (`Modeling/OLS.ipynb`)
+#### OLS (`Modeling/new_OLS.ipynb`)
 Predicts next-month excess return via a five-factor linear regression:
 
 $$\hat{y}_{i,t+1} = \hat{\alpha} + \hat{\beta}_1 (Mkt\text{-}RF)_t + \hat{\beta}_2 SMB_t + \hat{\beta}_3 HML_t + \hat{\beta}_4 RMW_t + \hat{\beta}_5 CMA_t$$
@@ -82,7 +88,7 @@ $$\hat{y}_{i,t+1} = \frac{1}{B} \sum_{b=1}^{B} T_b(X_t)$$
 
 Both models use the same feature vector $X_t = [Mkt\text{-}RF,\ SMB,\ HML,\ RMW,\ CMA]_t$ and are re-estimated every month within a **36-month rolling window** to prevent look-ahead bias.
 
-### Phase 3 — Portfolio Optimization (`MVO/MVO_Portfolio.ipynb`)
+### Phase 3 — Portfolio Optimization (`MVO/new_MVO.ipynb`) & Evaluation (`MVO/measurement.ipynb`)
 
 At each rebalancing month $T$:
 
@@ -125,10 +131,11 @@ pip install pandas numpy scikit-learn scipy matplotlib jupyter
 ### Run Order
 
 ```
-1. data_process/Clean_2.ipynb      → generates cleaned panel dataset
-2. Modeling/OLS.ipynb              → generates ols_top6_by_month_post2022.csv
-3. Modeling/RandomForest.ipynb     → generates rf_top6_by_month_post2022.csv
-4. MVO/MVO_Portfolio.ipynb         → runs optimization and backtesting
+1. data_process/Clean_2.ipynb       → generates cleaned panel dataset
+2. Modeling/new_OLS.ipynb           → generates ols_top6_by_month_post2022.csv
+3. Modeling/RandomForest.ipynb      → generates rf_top6_by_month_post2022.csv
+4. MVO/new_MVO.ipynb                → runs MVO optimization, outputs mvo_monthly_returns.csv
+5. MVO/measurement.ipynb            → computes performance metrics & generates evaluation plots
 ```
 
 > Notebooks must be run in this order as each stage depends on outputs from the previous one.
@@ -141,7 +148,6 @@ pip install pandas numpy scikit-learn scipy matplotlib jupyter
 - Ginger Gao · Duke University
 - Jade Cheng · Duke University
 - Tea Tafaj · Duke University
-- Wenyi Dai · Duke University
 
 ---
 
