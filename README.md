@@ -72,7 +72,6 @@ IDS586_Project_2026/
 - Apply investability filters: price ≥ $5, volume > 0, ≥ 36 months of valid history
 - Construct target label: `y_{i,t+1} = ExcessRet_{i,t+1} = MthRet_{i,t+1} − RF_{t+1}`
 - Construct liquidity proxy: `DollarVol = MthPrc_Abs × MthVol`
-- Output: `data_clean_2.csv`
 
 ### Phase 2 — Estimation Modeling
 
@@ -87,6 +86,8 @@ Captures non-linear factor interactions via an ensemble of regression trees:
 $$\hat{y}_{i,t+1} = \frac{1}{B} \sum_{b=1}^{B} T_b(X_t)$$
 
 Both models use the same feature vector $X_t = [Mkt\text{-}RF,\ SMB,\ HML,\ RMW,\ CMA]_t$ and are re-estimated every month within a **36-month rolling window** to prevent look-ahead bias.
+
+Output: `data/ols_top6_by_month_post2022.csv` (OLS) · `data/rf_top6_by_month_post2022.csv` (Random Forest)
 
 ### Phase 3 — Portfolio Optimization (`MVO/new_MVO.ipynb`) & Evaluation (`MVO/measurement.ipynb`)
 
